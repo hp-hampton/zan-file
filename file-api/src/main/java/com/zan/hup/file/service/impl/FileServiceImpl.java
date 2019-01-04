@@ -5,6 +5,7 @@ import com.mongodb.client.gridfs.GridFSBucket;
 import com.mongodb.client.gridfs.GridFSBuckets;
 import com.mongodb.client.gridfs.model.GridFSFile;
 import com.zan.hup.file.model.File;
+import com.zan.hup.file.repository.FileRepository;
 import com.zan.hup.file.service.FileService;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
@@ -43,6 +44,9 @@ public class FileServiceImpl implements FileService {
     @Autowired
     private MongoDbFactory mongoDbFactory;
 
+    @Autowired
+    private FileRepository fileRepository;
+
 
     public String singleFileUpload(MultipartFile multipartFile) {
         String originalFilename = multipartFile.getOriginalFilename();
@@ -68,6 +72,12 @@ public class FileServiceImpl implements FileService {
         return objectIds;
     }
 
+    @Override
+    public void deleteFile(String objectId) {
+        fileRepository.deleteById(objectId);
+    }
+
+    @Override
     public ResponseEntity download(String objectId) {
         File file = getFile(objectId);
         InputStreamResource inputStreamResource = new InputStreamResource(file.getContent());
@@ -79,6 +89,7 @@ public class FileServiceImpl implements FileService {
                 .body(inputStreamResource);
     }
 
+    @Override
     public ResponseEntity preview(String objectId) {
         File file = getFile(objectId);
         InputStreamResource inputStreamResource = new InputStreamResource(file.getContent());

@@ -31,6 +31,11 @@ public class FileController {
         return fileService.multiFileUpload(multipartFiles);
     }
 
+    @DeleteMapping
+    public void delete(@NotNull @RequestParam("objectId") String objectId) {
+        fileService.deleteFile(objectId);
+    }
+
     @GetMapping("/download")
     public ResponseEntity download(@NotNull @RequestParam("objectId") String objectId) {
         return fileService.download(objectId);

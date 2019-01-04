@@ -17,6 +17,8 @@ public interface FileService {
 
     List<String> multiFileUpload(MultipartFile[] multipartFiles);
 
+    void deleteFile(String objectId);
+
     ResponseEntity download(String objectId);
 
     ResponseEntity preview(String objectId);
