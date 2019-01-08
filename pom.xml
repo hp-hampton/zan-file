@@ -10,7 +10,7 @@
     <modules>
         <module>file-api</module>
         <module>file-server</module>
-        <module>file-cilent</module>
+        <module>file-client</module>
     </modules>
 
     <repositories>
