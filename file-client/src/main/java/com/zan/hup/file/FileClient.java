@@ -1,6 +1,5 @@
 package com.zan.hup.file;
 
-import com.sun.istack.internal.NotNull;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,18 +17,18 @@ import java.util.List;
 public interface FileClient {
 
     @PostMapping("/upload")
-    String upload(@NotNull MultipartFile multipartFile);
+    String upload(MultipartFile multipartFile);
 
     @PostMapping("/uploads")
-    List<String> upload(@NotNull MultipartFile[] multipartFiles);
+    List<String> upload(MultipartFile[] multipartFiles);
 
     @DeleteMapping
-    void delete(@NotNull @RequestParam("objectId") String objectId);
+    void delete(@RequestParam("objectId") String objectId);
 
     @GetMapping("/download")
-    ResponseEntity download(@NotNull @RequestParam("objectId") String objectId);
+    ResponseEntity download(@RequestParam("objectId") String objectId);
 
     @GetMapping("/preview")
-    ResponseEntity preview(@NotNull @RequestParam("objectId") String objectId);
+    ResponseEntity preview(@RequestParam("objectId") String objectId);
 
 }
